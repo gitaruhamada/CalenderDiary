@@ -1,0 +1,64 @@
+.data-management-view {
+  width: 100%;
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.data-management-back {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #4a90d9;
+  padding: 0;
+  font: inherit;
+  align-self: flex-start;
+}
+
+.data-management-title {
+  margin: 0;
+}
+
+.data-management-block {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.data-management-block h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.data-management-block p {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: #767676;
+}
+
+.data-management-block button,
+.data-management-import-label {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #4a90d9;
+  color: #4a90d9;
+  background: #fff;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.data-management-block button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.data-management-status {
+  font-size: 0.85rem;
+  color: #2c6bb3;
+  margin: 0;
+}

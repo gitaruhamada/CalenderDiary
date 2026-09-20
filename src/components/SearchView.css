@@ -70,7 +70,7 @@
 }
 
 .search-view-empty {
-  color: #888;
+  color: #767676;
   font-size: 0.9rem;
 }
 
@@ -103,5 +103,5 @@
 
 .search-view-result-date {
   font-size: 0.75rem;
-  color: #888;
+  color: #767676;
 }

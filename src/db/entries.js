@@ -113,3 +113,15 @@ export async function deleteEntry(id) {
     tx.onerror = () => reject(tx.error);
   });
 }
+
+// インポート専用。同じIDのエントリは上書きするため、addEntryのadd()ではなくput()を使う。
+export async function importEntries(entries) {
+  const db = await openDatabase();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    entries.forEach((entry) => store.put(entry));
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}

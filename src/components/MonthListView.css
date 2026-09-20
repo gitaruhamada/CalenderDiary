@@ -21,7 +21,7 @@
 }
 
 .month-list-empty {
-  color: #888;
+  color: #767676;
   font-size: 0.9rem;
 }
 
@@ -54,7 +54,7 @@
 
 .month-list-item-date {
   font-size: 0.75rem;
-  color: #888;
+  color: #767676;
 }
 
 .month-list-item-tags {

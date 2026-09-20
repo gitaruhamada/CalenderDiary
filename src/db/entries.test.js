@@ -8,6 +8,7 @@ import {
   getEntriesByDate,
   getEntriesByDateRange,
   getEntry,
+  importEntries,
   MAX_IMAGES_PER_ENTRY,
   updateEntry,
 } from './entries.js';
@@ -104,5 +105,48 @@ describe('getAllEntries', () => {
 
     const entries = await getAllEntries();
     expect(entries).toHaveLength(2);
+  });
+});
+
+describe('importEntries', () => {
+  it('新しいエントリを取り込める', async () => {
+    await importEntries([
+      {
+        id: 'import-1',
+        date: '2026-09-20',
+        title: '復元されたタイトル',
+        body: '復元された本文',
+        images: [],
+        tags: ['バックアップ'],
+        createdAt: '2026-09-20T00:00:00.000Z',
+        updatedAt: '2026-09-20T00:00:00.000Z',
+      },
+    ]);
+
+    const fetched = await getEntry('import-1');
+    expect(fetched.title).toBe('復元されたタイトル');
+    expect(fetched.tags).toEqual(['バックアップ']);
+  });
+
+  it('同じIDのエントリは上書きされる(再インポートしてもエラーにならない)', async () => {
+    const entry = {
+      id: 'import-2',
+      date: '2026-09-20',
+      title: '元のタイトル',
+      body: '本文',
+      images: [],
+      tags: [],
+      createdAt: '2026-09-20T00:00:00.000Z',
+      updatedAt: '2026-09-20T00:00:00.000Z',
+    };
+
+    await importEntries([entry]);
+    await importEntries([{ ...entry, title: '上書き後のタイトル' }]);
+
+    const fetched = await getEntry('import-2');
+    expect(fetched.title).toBe('上書き後のタイトル');
+
+    const all = await getAllEntries();
+    expect(all).toHaveLength(1);
   });
 });

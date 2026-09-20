@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Calendar from './components/Calendar.jsx';
+import DataManagementView from './components/DataManagementView.jsx';
 import DayEntryList from './components/DayEntryList.jsx';
 import EntryDetail from './components/EntryDetail.jsx';
 import EntryForm from './components/EntryForm.jsx';
@@ -112,6 +113,13 @@ function App() {
         >
           検索
         </button>
+        <button
+          type="button"
+          className={screen === 'data' ? 'app-nav-active' : ''}
+          onClick={() => setScreen('data')}
+        >
+          データ管理
+        </button>
       </nav>
 
       {screen === 'calendar' && (
@@ -183,6 +191,10 @@ function App() {
           onSelectResult={(entry) => goToEntry(entry.date, entry.id)}
           onBack={() => setScreen('calendar')}
         />
+      )}
+
+      {screen === 'data' && (
+        <DataManagementView onBack={() => setScreen('calendar')} onImported={refresh} />
       )}
     </main>
   );
