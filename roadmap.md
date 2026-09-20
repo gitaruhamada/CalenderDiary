@@ -18,12 +18,12 @@
 - [x] Vite + React でプロジェクト雛形を作成
 - [x] ディレクトリ構成の決定（`src/db/` `src/components/` `src/hooks/`、詳細は`CLAUDE.md`を参照）
 
-## フェーズ1: データ層（IndexedDB）
+## フェーズ1: データ層（IndexedDB） ✅完了
 
-- [ ] スキーマ定義（`id / date / title / body / images / tags / createdAt / updatedAt`）
-- [ ] CRUD用ラッパー関数の実装（追加・取得・更新・削除、日付範囲での取得）
-- [ ] 画像をBlobとして保存し、エントリから参照する仕組みの実装
-- [ ] UIなしでの動作確認（コンソール／簡易テスト）
+- [x] スキーマ定義（`id / date / title / body / images / tags / createdAt / updatedAt`）
+- [x] CRUD用ラッパー関数の実装（追加・取得・更新・削除、日付範囲での取得）
+- [x] 画像をBlobとして保存し、エントリから参照する仕組みの実装
+- [x] UIなしでの動作確認（vitest + fake-indexeddbによる自動テスト、9件すべてパス）
 
 ## フェーズ2: カレンダー画面（コア機能）
 

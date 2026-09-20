@@ -4,7 +4,7 @@
 
 ## プロジェクトの状態
 
-Vite + React の雛形（フェーズ0）が作成済み。フェーズ1（IndexedDBデータ層）以降は未着手。進捗の詳細は `roadmap.md` を参照。
+Vite + React の雛形（フェーズ0）と IndexedDB データ層（フェーズ1、`src/db/`）が実装済み。フェーズ2（カレンダー画面）以降は未着手。進捗の詳細は `roadmap.md` を参照。
 
 ## よく使うコマンド
 
@@ -13,15 +13,25 @@ Vite + React の雛形（フェーズ0）が作成済み。フェーズ1（Index
 - `npm run build` — 本番ビルド（`dist/` に出力、Gitでは無視）
 - `npm run lint` — oxlintによるlint
 - `npm run preview` — ビルド成果物のプレビュー
+- `npm run test` — vitestでテストを一括実行
+- `npx vitest run src/db/entries.test.js` — 単一のテストファイルのみ実行
+- `npx vitest run -t "テスト名の一部"` — 名前でテストを絞り込んで実行
 
-現時点でテストランナーは未導入。テストを追加する際は、この節に実行コマンド（単一テストの実行方法を含む）を追記すること。
+テストにはvitestを使用し、ブラウザのIndexedDBはテスト環境で使えないため`fake-indexeddb`でモックしている（`src/db/entries.test.js`参照）。
 
 ## ディレクトリ構成
 
 - `src/` — アプリケーション本体（Viteのデフォルト構成）
-- `src/db/`（予定）— IndexedDBラッパー・CRUD関数（フェーズ1で追加）
+- `src/db/` — IndexedDBラッパー・CRUD関数（実装済み。`database.js`が接続管理、`entries.js`がCRUD、`entries.test.js`がテスト）
 - `src/components/`（予定）— カレンダー・日記フォーム等のUIコンポーネント（フェーズ2以降で追加）
 - `src/hooks/`（予定）— データ取得・状態管理用のカスタムフック（必要に応じて追加）
+
+## データ層（`src/db/`）の設計メモ
+
+- IndexedDBのDB名は`carender-diary`、オブジェクトストア名は`entries`（`database.js`の定数を参照）。
+- インデックス: `date`（範囲検索用、非ユニーク）、`tags`（`multiEntry`、将来のタグ絞り込み用）。
+- 画像はBase64ではなく`Blob`のままエントリオブジェクトに埋め込んで保存する（IndexedDBは構造化複製でBlobを直接保存できるため）。
+- `openDatabase()`は接続をモジュール内にキャッシュするシングルトン。テストで独立した状態が必要な場合は`closeDatabaseConnection()`で明示的に接続を閉じてから`indexedDB.deleteDatabase()`すること（接続を閉じずに削除しようとすると`blocked`状態でハングする）。
 
 ## このプロジェクトについて
 
