@@ -40,6 +40,16 @@ function EntryDetail({ entry, onEdit, onDelete, onBack }) {
         </div>
       )}
 
+      {entry.tags.length > 0 && (
+        <div className="entry-detail-tags">
+          {entry.tags.map((tag) => (
+            <span key={tag} className="entry-detail-tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
       <div className="entry-detail-actions">
         <button type="button" onClick={onEdit}>
           編集

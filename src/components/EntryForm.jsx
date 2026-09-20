@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { MAX_IMAGES_PER_ENTRY } from '../db/entries.js';
 import ImagePicker from './ImagePicker.jsx';
+import TagInput from './TagInput.jsx';
 import './EntryForm.css';
 
 function EntryForm({
   initialTitle = '',
   initialBody = '',
   initialImages = [],
+  initialTags = [],
   submitLabel,
   onSubmit,
   onCancel,
@@ -14,6 +16,7 @@ function EntryForm({
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);
   const [images, setImages] = useState(initialImages);
+  const [tags, setTags] = useState(initialTags);
   const [error, setError] = useState('');
 
   function handleAddImages(files) {
@@ -32,7 +35,7 @@ function EntryForm({
       return;
     }
 
-    onSubmit({ title, body, images });
+    onSubmit({ title, body, images, tags });
   }
 
   return (
@@ -59,6 +62,11 @@ function EntryForm({
           onRemove={handleRemoveImage}
           maxImages={MAX_IMAGES_PER_ENTRY}
         />
+      </div>
+
+      <div className="entry-form-field">
+        <span>タグ（任意）</span>
+        <TagInput tags={tags} onChange={setTags} />
       </div>
 
       {error && <p className="entry-form-error">{error}</p>}

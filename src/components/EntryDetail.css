@@ -84,3 +84,18 @@
   max-height: 90vh;
   object-fit: contain;
 }
+
+.entry-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.entry-detail-tag {
+  background: #e7f0fb;
+  color: #2c6bb3;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.8rem;
+}

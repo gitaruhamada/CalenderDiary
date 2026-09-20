@@ -1,0 +1,63 @@
+.month-list-view {
+  width: 100%;
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+}
+
+.month-list-back {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #4a90d9;
+  padding: 0;
+  font: inherit;
+  margin-bottom: 0.75rem;
+}
+
+.month-list-title {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.month-list-empty {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.month-list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.month-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  background: #fff;
+}
+
+.month-list-item:hover {
+  border-color: #4a90d9;
+}
+
+.month-list-item-date {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.month-list-item-tags {
+  font-size: 0.75rem;
+  color: #2c6bb3;
+}

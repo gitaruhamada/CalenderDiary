@@ -1,0 +1,39 @@
+.tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.4rem;
+}
+
+.tag-input-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #e7f0fb;
+  color: #2c6bb3;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.tag-input-chip button {
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.tag-input-field {
+  flex: 1;
+  min-width: 6rem;
+  border: none;
+  outline: none;
+  font: inherit;
+  padding: 0.2rem;
+}
