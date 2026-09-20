@@ -1,10 +1,28 @@
 import { useState } from 'react';
+import { MAX_IMAGES_PER_ENTRY } from '../db/entries.js';
+import ImagePicker from './ImagePicker.jsx';
 import './EntryForm.css';
 
-function EntryForm({ initialTitle = '', initialBody = '', submitLabel, onSubmit, onCancel }) {
+function EntryForm({
+  initialTitle = '',
+  initialBody = '',
+  initialImages = [],
+  submitLabel,
+  onSubmit,
+  onCancel,
+}) {
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);
+  const [images, setImages] = useState(initialImages);
   const [error, setError] = useState('');
+
+  function handleAddImages(files) {
+    setImages((current) => [...current, ...files]);
+  }
+
+  function handleRemoveImage(index) {
+    setImages((current) => current.filter((_, i) => i !== index));
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,7 +32,7 @@ function EntryForm({ initialTitle = '', initialBody = '', submitLabel, onSubmit,
       return;
     }
 
-    onSubmit({ title, body });
+    onSubmit({ title, body, images });
   }
 
   return (
@@ -32,6 +50,16 @@ function EntryForm({ initialTitle = '', initialBody = '', submitLabel, onSubmit,
           rows={6}
         />
       </label>
+
+      <div className="entry-form-field">
+        <span>画像（任意、最大{MAX_IMAGES_PER_ENTRY}枚）</span>
+        <ImagePicker
+          images={images}
+          onAdd={handleAddImages}
+          onRemove={handleRemoveImage}
+          maxImages={MAX_IMAGES_PER_ENTRY}
+        />
+      </div>
 
       {error && <p className="entry-form-error">{error}</p>}
 

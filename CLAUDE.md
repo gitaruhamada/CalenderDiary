@@ -4,7 +4,7 @@
 
 ## プロジェクトの状態
 
-Vite + React の雛形（フェーズ0）、IndexedDB データ層（フェーズ1、`src/db/`）、カレンダー画面（フェーズ2）、日記のCRUD UI（フェーズ3、`EntryForm.jsx`/`EntryDetail.jsx`）が実装済み。フェーズ4（画像添付）以降は未着手。進捗の詳細は `roadmap.md` を参照。
+Vite + React の雛形（フェーズ0）、IndexedDB データ層（フェーズ1、`src/db/`）、カレンダー画面（フェーズ2）、日記のCRUD UI（フェーズ3）、画像添付（フェーズ4、`ImagePicker.jsx`）が実装済み。フェーズ5（タグ・検索・月間一覧）以降は未着手。進捗の詳細は `roadmap.md` を参照。
 
 ## よく使うコマンド
 
@@ -23,8 +23,9 @@ Vite + React の雛形（フェーズ0）、IndexedDB データ層（フェー�
 
 - `src/` — アプリケーション本体（Viteのデフォルト構成）
 - `src/db/` — IndexedDBラッパー・CRUD関数（実装済み。`database.js`が接続管理、`entries.js`がCRUD、`entries.test.js`がテスト）
-- `src/components/`（予定）— カレンダー・日記フォーム等のUIコンポーネント（フェーズ2以降で追加）
-- `src/hooks/`（予定）— データ取得・状態管理用のカスタムフック（必要に応じて追加）
+- `src/components/` — UIコンポーネント（`Calendar`、`DayEntryList`、`EntryForm`、`EntryDetail`、`ImagePicker`）
+- `src/hooks/` — `useMonthEntries`（月間の日記データ取得・再取得）
+- `src/utils/` — `calendarGrid`（カレンダーの日付グリッド計算、純粋関数）
 
 ## データ層（`src/db/`）の設計メモ
 
@@ -32,6 +33,10 @@ Vite + React の雛形（フェーズ0）、IndexedDB データ層（フェー�
 - インデックス: `date`（範囲検索用、非ユニーク）、`tags`（`multiEntry`、将来のタグ絞り込み用）。
 - 画像はBase64ではなく`Blob`のままエントリオブジェクトに埋め込んで保存する（IndexedDBは構造化複製でBlobを直接保存できるため）。
 - `openDatabase()`は接続をモジュール内にキャッシュするシングルトン。テストで独立した状態が必要な場合は`closeDatabaseConnection()`で明示的に接続を閉じてから`indexedDB.deleteDatabase()`すること（接続を閉じずに削除しようとすると`blocked`状態でハングする）。
+
+## UI実装の注意点
+
+- 画像プレビュー用の`URL.createObjectURL()`は、生成と`URL.revokeObjectURL()`による破棄を必ず同じ`useEffect`内で対にすること（`ImagePicker.jsx`/`EntryDetail.jsx`参照）。`useMemo`で生成すると、開発時の`StrictMode`によるエフェクト二重実行でクリーンアップが即座にURLを失効させ、`<img>`が読み込む前に`blob:`が壊れる（実際に発生した不具合）。
 
 ## このプロジェクトについて
 

@@ -52,14 +52,14 @@ function App() {
     setPanel({ mode: 'list' });
   }
 
-  async function handleCreate({ title, body }) {
-    await addEntry({ date: selectedDate, title, body });
+  async function handleCreate({ title, body, images }) {
+    await addEntry({ date: selectedDate, title, body, images });
     await refresh();
     setPanel({ mode: 'list' });
   }
 
-  async function handleUpdate(entryId, { title, body }) {
-    await updateEntry(entryId, { title, body });
+  async function handleUpdate(entryId, { title, body, images }) {
+    await updateEntry(entryId, { title, body, images });
     await refresh();
     setPanel({ mode: 'view', entryId });
   }
@@ -122,6 +122,7 @@ function App() {
           submitLabel="更新"
           initialTitle={activeEntry.title}
           initialBody={activeEntry.body}
+          initialImages={activeEntry.images}
           onSubmit={(values) => handleUpdate(activeEntry.id, values)}
           onCancel={() => setPanel({ mode: 'view', entryId: activeEntry.id })}
         />
