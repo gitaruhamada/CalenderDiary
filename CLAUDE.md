@@ -4,7 +4,7 @@
 
 ## プロジェクトの状態
 
-Vite + React の雛形（フェーズ0）、IndexedDB データ層（フェーズ1、`src/db/`）、カレンダー画面（フェーズ2、`src/components/Calendar.jsx`他）が実装済み。フェーズ3（日記CRUD UI）以降は未着手。進捗の詳細は `roadmap.md` を参照。
+Vite + React の雛形（フェーズ0）、IndexedDB データ層（フェーズ1、`src/db/`）、カレンダー画面（フェーズ2）、日記のCRUD UI（フェーズ3、`EntryForm.jsx`/`EntryDetail.jsx`）が実装済み。フェーズ4（画像添付）以降は未着手。進捗の詳細は `roadmap.md` を参照。
 
 ## よく使うコマンド
 

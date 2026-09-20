@@ -5,9 +5,27 @@
   text-align: left;
 }
 
+.day-entry-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
 .day-entry-list-title {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
+}
+
+.day-entry-list-add {
+  cursor: pointer;
+  border: 1px solid #4a90d9;
+  color: #4a90d9;
+  background: #fff;
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  font: inherit;
+  font-size: 0.85rem;
 }
 
 .day-entry-list-message {
@@ -25,7 +43,17 @@
 }
 
 .day-entry-list-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
+  font: inherit;
+  background: #fff;
+}
+
+.day-entry-list-item:hover {
+  border-color: #4a90d9;
 }

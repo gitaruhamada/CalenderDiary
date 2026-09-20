@@ -1,0 +1,44 @@
+.entry-detail {
+  width: 100%;
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+}
+
+.entry-detail-back {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #4a90d9;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  font: inherit;
+}
+
+.entry-detail-title {
+  margin: 0 0 0.5rem;
+}
+
+.entry-detail-body {
+  white-space: pre-wrap;
+  margin: 0 0 1rem;
+}
+
+.entry-detail-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.entry-detail-actions button {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  background: #fff;
+}
+
+.entry-detail-delete {
+  color: #c0392b;
+  border-color: #c0392b;
+}

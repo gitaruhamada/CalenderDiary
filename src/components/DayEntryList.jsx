@@ -1,9 +1,14 @@
 import './DayEntryList.css';
 
-function DayEntryList({ date, entries, isLoading }) {
+function DayEntryList({ date, entries, isLoading, onSelectEntry, onCreateNew }) {
   return (
     <section className="day-entry-list">
-      <h2 className="day-entry-list-title">{date}</h2>
+      <div className="day-entry-list-header">
+        <h2 className="day-entry-list-title">{date}</h2>
+        <button type="button" className="day-entry-list-add" onClick={onCreateNew}>
+          ＋ 新規作成
+        </button>
+      </div>
 
       {isLoading ? (
         <p className="day-entry-list-message">読み込み中...</p>
@@ -12,8 +17,14 @@ function DayEntryList({ date, entries, isLoading }) {
       ) : (
         <ul className="day-entry-list-items">
           {entries.map((entry) => (
-            <li key={entry.id} className="day-entry-list-item">
-              {entry.title || '(無題)'}
+            <li key={entry.id}>
+              <button
+                type="button"
+                className="day-entry-list-item"
+                onClick={() => onSelectEntry(entry.id)}
+              >
+                {entry.title || '(無題)'}
+              </button>
             </li>
           ))}
         </ul>

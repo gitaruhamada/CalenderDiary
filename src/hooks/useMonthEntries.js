@@ -23,6 +23,7 @@ function groupByDate(entries) {
 
 function useMonthEntries(year, month) {
   const [loaded, setLoaded] = useState(null);
+  const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -36,13 +37,14 @@ function useMonthEntries(year, month) {
     return () => {
       cancelled = true;
     };
-  }, [year, month]);
+  }, [year, month, reloadToken]);
 
   const isCurrent = loaded !== null && loaded.year === year && loaded.month === month;
 
   return {
     entriesByDate: isCurrent ? loaded.entriesByDate : {},
     isLoading: !isCurrent,
+    refresh: () => setReloadToken((token) => token + 1),
   };
 }
 
