@@ -50,6 +50,8 @@ describe('addEntry / getEntry', () => {
 describe('getEntriesByDate', () => {
   it('同一日付に複数エントリを登録でき、作成順に取得できる', async () => {
     const first = await addEntry({ date: '2026-09-20', body: '朝の日記' });
+    // createdAt(ミリ秒精度)が同一にならないよう、実際の連続作成を想定して間隔を空ける
+    await new Promise((resolve) => setTimeout(resolve, 2));
     const second = await addEntry({ date: '2026-09-20', body: '夜の日記' });
     await addEntry({ date: '2026-09-21', body: '別の日' });
 
